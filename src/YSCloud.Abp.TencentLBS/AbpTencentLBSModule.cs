@@ -14,6 +14,8 @@ namespace YSCloud.Abp.TencentLBS
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            var configuration = context.Services.GetConfiguration();
+
             context.Services.AddHttpClient(TencentCommonConsts.DefaultHttpClientName);
 
             Configure<AbpVirtualFileSystemOptions>(options =>
@@ -32,6 +34,11 @@ namespace YSCloud.Abp.TencentLBS
             Configure<AbpExceptionLocalizationOptions>(options =>
             {
                 options.MapCodeNamespace("YSCloud.Abp.TencentLBS", typeof(AbpTencentLBSResource));
+            });
+
+            Configure<AbpTencentLBSCommonOptions>(options => {
+                options.EndPoint = configuration["AbpTencentLBSCommonOptions:EndPoint"];
+                options.Key = configuration["AbpTencentLBSCommonOptions:Key"];
             });
         }
     }

@@ -17,10 +17,9 @@ namespace YSCloud.Abp.TencentLBS.Geocoder
 
         private readonly GeocoderAPI _geocoderAPI;
 
-        public GeocoderApiRequester(ISettingProvider settingProvider, GeocoderAPI geocoderAPI, IOptions<AbpTencentLBSCommonOptions> options)
+        public GeocoderApiRequester(ISettingProvider settingProvider, IOptions<AbpTencentLBSCommonOptions> options)
         {
             _settingProvider = settingProvider;
-            _geocoderAPI = geocoderAPI;
             _geocoderAPI = RestService.For<GeocoderAPI>(options.Value.EndPoint,
             new RefitSettings
             {

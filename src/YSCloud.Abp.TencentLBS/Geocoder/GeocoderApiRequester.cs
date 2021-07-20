@@ -32,11 +32,11 @@ namespace YSCloud.Abp.TencentLBS.Geocoder
             });
         }
 
-        public async Task<GeocodingResponse> Geocoding(GeocodingRequest request)
+        public async Task<GeocodingResponse> Geocoding(string address)
         {
             var key = await _settingProvider.GetOrNullAsync(AbpTencentLBSSettings.DefaultKey);
-
-            var response = await _geocoderAPI.Geocoding(key, request);
+            
+            var response = await _geocoderAPI.Geocoding(key, address);
 
             response.CheckStatus();
 
